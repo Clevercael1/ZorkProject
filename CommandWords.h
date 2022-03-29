@@ -1,0 +1,4 @@
+#ifndef COMMANDWORDS_H
+#define COMMANDWORDS_H
+
+#endif // COMMANDWORDS_H
