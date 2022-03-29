@@ -15,9 +15,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     pushMap = new QPushButton(this);
-    pushMap->setText("say hi"); //todo
-    pushMap->setGeometry(QRect(QPoint(20, 90), QSize(50, 50))); //todo
+    pushMap->setText("Display Map"); //todo
+    pushMap->setGeometry(QRect(QPoint(20, 10), QSize(101, 61)));
     connect(pushMap, SIGNAL(clicked()), this, SLOT(on_pushMap_clicked()));
+
+
 }
 
 MainWindow::~MainWindow()

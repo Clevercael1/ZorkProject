@@ -18,18 +18,29 @@ public:
 
 private slots:
     void on_pushMap_clicked();
-    void on_pushButton3_clicked();
-    void on_pushButton4_clicked();
-    void on_pushButton5_clicked();
+    void on_pushTake_clicked();
+    void on_pushDrop_clicked();
+    void on_pushNorth_clicked();
+    void on_pushSouth_clicked();
+    void on_pushEast_clicked();
+    void on_pushWest_clicked();
+    void on_pushQuit_clicked();
+    void on_pushTeleport_clicked();
 
 
 private:
     Ui::MainWindow *ui;
+
     // requires an #include<QPushButton> at the top of the file
     QPushButton *pushMap;
-    QPushButton *push_button3;
-    QPushButton *push_button4;
-    QPushButton *push_button5;
+    QPushButton *pushTake;
+    QPushButton *pushDrop;
+    QPushButton *pushNorth;
+    QPushButton *pushSouth;
+    QPushButton *pushEast;
+    QPushButton *pushWest;
+    QPushButton *pushQuit;
+    QPushButton *pushTeleport;
 
 };
 #endif // MAINWINDOW_H
