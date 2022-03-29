@@ -11,9 +11,22 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap dir("C:/Users/caelo/Documents/ZorkProject/ImageFiles/dog");
     ui->ImageOutput->setPixmap(dir);
     ui->ImageOutput->setScaledContents(true);
+
+
+
+    pushMap = new QPushButton(this);
+    pushMap->setText("say hi"); //todo
+    pushMap->setGeometry(QRect(QPoint(20, 90), QSize(50, 50))); //todo
+    connect(pushMap, SIGNAL(clicked()), this, SLOT(on_pushMap_clicked()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+void MainWindow::on_pushMap_clicked()
+{
+    ui->MainOutput->setText("Hi!!!!!!"); //todo
 }
