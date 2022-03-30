@@ -105,7 +105,7 @@ bool ZorkUL::processCommand(Command command) {
     if (commandWord.compare("info") == 0)
         printHelp();
 
-    else if (commandWord.compare("map") == 0)
+    /*else if (commandWord.compare("map") == 0)
         {
         cout << "[h] --- [f] --- [g]" << endl;
         cout << "         |         " << endl;
@@ -118,7 +118,7 @@ bool ZorkUL::processCommand(Command command) {
         cout << " |                 " << endl;
         cout << "[j] --- [k] --- [l]" << endl;
 
-    }
+    }*/
 
     else if (commandWord.compare("go") == 0)
         goRoom(command);
