@@ -203,12 +203,12 @@ bool ZorkUL::processCommand(Command command) {
         }
     }
 */
-    else if (commandWord.compare("quit") == 0) {
+/*    else if (commandWord.compare("quit") == 0) {
         if (command.hasSecondWord())
             cout << "overdefined input"<< endl;
         else
-            return true; /**signal to quit*/
-    }
+            return true; signal to quit
+    }*/
     return false;
 }
 /** COMMANDS **/

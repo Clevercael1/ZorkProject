@@ -22,42 +22,42 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     pushTake = new QPushButton(this);
-    pushTake->setText("Pickup Item"); //todo
+    pushTake->setText("Pickup Item");
     pushTake->setGeometry(QRect(QPoint(140, 10), QSize(101, 61)));
     connect(pushTake, SIGNAL(clicked()), this, SLOT(on_pushTake_clicked()));
 
     pushDrop = new QPushButton(this);
-    pushDrop->setText("Drop Item"); //todo
+    pushDrop->setText("Drop Item");
     pushDrop->setGeometry(QRect(QPoint(260, 10), QSize(101, 61)));
     connect(pushDrop, SIGNAL(clicked()), this, SLOT(on_pushDrop_clicked()));
 
     pushNorth = new QPushButton(this);
-    pushNorth->setText("Go North"); //todo
+    pushNorth->setText("Go North");
     pushNorth->setGeometry(QRect(QPoint(500, 10), QSize(101, 61)));
     connect(pushNorth, SIGNAL(clicked()), this, SLOT(on_pushNorth_clicked()));
 
     pushSouth = new QPushButton(this);
-    pushSouth->setText("Go South"); //todo
+    pushSouth->setText("Go South");
     pushSouth->setGeometry(QRect(QPoint(500, 150), QSize(101, 61)));
     connect(pushSouth, SIGNAL(clicked()), this, SLOT(on_pushSouth_clicked()));
 
     pushEast = new QPushButton(this);
-    pushEast->setText("Go East"); //todo
+    pushEast->setText("Go East");
     pushEast->setGeometry(QRect(QPoint(600, 80), QSize(101, 61)));
     connect(pushEast, SIGNAL(clicked()), this, SLOT(on_pushEast_clicked()));
 
     pushWest = new QPushButton(this);
-    pushWest->setText("Go West"); //todo
+    pushWest->setText("Go West");
     pushWest->setGeometry(QRect(QPoint(400, 80), QSize(101, 61)));
     connect(pushWest, SIGNAL(clicked()), this, SLOT(on_pushWest_clicked()));
 
     pushQuit = new QPushButton(this);
-    pushQuit->setText("Quit Game"); //todo
+    pushQuit->setText("Quit Game");
     pushQuit->setGeometry(QRect(QPoint(680, 10), QSize(101, 61)));
     connect(pushQuit, SIGNAL(clicked()), this, SLOT(on_pushQuit_clicked()));
 
     pushTeleport = new QPushButton(this);
-    pushTeleport->setText("Teleport"); //todo
+    pushTeleport->setText("Teleport");
     pushTeleport->setGeometry(QRect(QPoint(380, 10), QSize(101, 61)));
     connect(pushTeleport, SIGNAL(clicked()), this, SLOT(on_pushTeleport_clicked()));
 
@@ -89,9 +89,12 @@ void MainWindow::on_pushDrop_clicked()
 
 void MainWindow::on_pushNorth_clicked()
 {
-    Command *north = new Command("go", "north");
-    goRoom(north);
-
+    ZorkUL obj;
+    Room* nextRoom = obj.currentRoom->nextRoom("north");
+    obj.currentRoom = nextRoom;
+    string output = obj.currentRoom->longDescription();
+    QString qstr = QString::fromStdString(output);
+    ui->MainOutput->setText(qstr);
 }
 
 void MainWindow::on_pushSouth_clicked()
@@ -111,6 +114,7 @@ void MainWindow::on_pushWest_clicked()
 
 void MainWindow::on_pushQuit_clicked()
 {
+    exit(0);
 
 }
 

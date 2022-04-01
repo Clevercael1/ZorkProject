@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include "ZorkUL.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

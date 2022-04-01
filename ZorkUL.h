@@ -10,6 +10,7 @@
 using namespace std;
 
 class ZorkUL {
+
 private:
     Parser parser;
     Room *currentRoom;
@@ -28,6 +29,7 @@ public:
     ZorkUL();
     void play();
     string go(string direction);
+    friend class mainwindow;
 };
 
 #endif /*ZORKUL_H_*/
