@@ -18,7 +18,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushMap_clicked();
+    //void on_pushMap_clicked();
     void on_pushTake_clicked();
     void on_pushDrop_clicked();
     void on_pushNorth_clicked();
@@ -29,11 +29,17 @@ private slots:
     void on_pushTeleport_clicked();
 
 
+    void on_pushMap_pressed();
+
+    void on_pushMap_released();
+
 private:
     Ui::MainWindow *ui;
 
+    ZorkUL *zork;
+
     // requires an #include<QPushButton> at the top of the file
-    QPushButton *pushMap;
+    //QPushButton *pushMap;
     QPushButton *pushTake;
     QPushButton *pushDrop;
     QPushButton *pushNorth;
@@ -42,6 +48,5 @@ private:
     QPushButton *pushWest;
     QPushButton *pushQuit;
     QPushButton *pushTeleport;
-
 };
 #endif // MAINWINDOW_H

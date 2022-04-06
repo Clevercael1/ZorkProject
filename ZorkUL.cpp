@@ -120,53 +120,53 @@ bool ZorkUL::processCommand(Command command) {
 
     }*/
 
-    else if (commandWord.compare("go") == 0)
-        goRoom(command);
+    //else if (commandWord.compare("go") == 0)
+        //goRoom(command);
 
-    else if (commandWord.compare("teleport") == 0)
-    {
-        string roomName;
-        int randomNum = rand() % 12;
-            switch(randomNum) {
-            case(0):
-                roomName = "a";
-                break;
-            case(1):
-                roomName = "b";
-                break;
-            case(2):
-                roomName = "c";
-                break;
-            case(3):
-                roomName = "d";
-                break;
-            case(4):
-                roomName = "e";
-                break;
-            case(5):
-                roomName = "f";
-                break;
-            case(6):
-                roomName = "g";
-                break;
-            case(7):
-                roomName = "h";
-                break;
-            case(8):
-                roomName = "i";
-                break;
-            case(9):
-                roomName = "j";
-                break;
-            case(10):
-                roomName = "k";
-                break;
-            case(11):
-                roomName = "l";
-                break;
-            }
-        teleport(roomName);
-    }
+//    else if (commandWord.compare("teleport") == 0)
+//    {
+//        string roomName;
+//        int randomNum = rand() % 12;
+//            switch(randomNum) {
+//            case(0):
+//                roomName = "a";
+//                break;
+//            case(1):
+//                roomName = "b";
+//                break;
+//            case(2):
+//                roomName = "c";
+//                break;
+//            case(3):
+//                roomName = "d";
+//                break;
+//            case(4):
+//                roomName = "e";
+//                break;
+//            case(5):
+//                roomName = "f";
+//                break;
+//            case(6):
+//                roomName = "g";
+//                break;
+//            case(7):
+//                roomName = "h";
+//                break;
+//            case(8):
+//                roomName = "i";
+//                break;
+//            case(9):
+//                roomName = "j";
+//                break;
+//            case(10):
+//                roomName = "k";
+//                break;
+//            case(11):
+//                roomName = "l";
+//                break;
+//            }
+//        teleport(roomName);
+//    }
     else if (commandWord.compare("take") == 0)
     {
         if (!command.hasSecondWord()) {
@@ -218,7 +218,7 @@ void ZorkUL::printHelp() {
 
 }
 
-void ZorkUL::goRoom(Command command) {
+/*void ZorkUL::goRoom(Command command) {
     if (!command.hasSecondWord()) {
         cout << "incomplete input"<< endl;
         return;
@@ -235,7 +235,7 @@ void ZorkUL::goRoom(Command command) {
         currentRoom = nextRoom;
         cout << currentRoom->longDescription() << endl;
     }
-}
+}*/
 
 string ZorkUL::go(string direction) {
     //Make the direction lowercase
@@ -262,3 +262,12 @@ void ZorkUL::teleport(string roomName) {
             }
         }
     }
+
+
+Room* ZorkUL::getCurrentRoom() {
+    return currentRoom;
+}
+
+void ZorkUL::setCurrentRoom(Room* inRoom) {
+    currentRoom = inRoom;
+}

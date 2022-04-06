@@ -7,6 +7,8 @@
 #include "item.h"
 #include <iostream>
 #include <string>
+#include <exception>
+
 using namespace std;
 
 class ZorkUL {
@@ -18,18 +20,20 @@ private:
     void printWelcome();
     bool processCommand(Command command);
     void printHelp();
-    void goRoom(Command command);
+    //void goRoom(Command command);
     void createItems();
     void displayItems();
-    void teleport(string rooms);
     vector<Room*> rooms;
+
 
 
 public:
     ZorkUL();
     void play();
     string go(string direction);
-    friend class mainwindow;
+    Room* getCurrentRoom();
+    void setCurrentRoom(Room*);
+    void teleport(string rooms);
 };
 
 #endif /*ZORKUL_H_*/

@@ -36,7 +36,7 @@ string Room::exitString() {
 Room* Room::nextRoom(string direction) {
     map<string, Room*>::iterator next = exits.find(direction); //returns an iterator for the "pair"
     if (next == exits.end())
-        return NULL; // if exits.end() was returned, there's no room in that direction.
+        throw "No Room in specified direction"; // if exits.end() was returned, there's no room in that direction. throw custom exception
     return next->second; // If there is a room, remove the "second" (Room*)
                 // part of the "pair" (<string, Room*>) and return it.
 }

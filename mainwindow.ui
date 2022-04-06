@@ -206,6 +206,19 @@ background-color: rgb(0, 0, 0);</string>
      <string>ImageOutput</string>
     </property>
    </widget>
+   <widget class="QLabel" name="ExceptionLabel">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>250</y>
+      <width>251</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>MainOutput</zorder>
    <zorder>pushSouth</zorder>
    <zorder>pushWest</zorder>
@@ -217,6 +230,7 @@ background-color: rgb(0, 0, 0);</string>
    <zorder>pushQuit</zorder>
    <zorder>ImageOutput</zorder>
    <zorder>pushMap</zorder>
+   <zorder>ExceptionLabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
