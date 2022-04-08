@@ -8,9 +8,10 @@
 
 bool doesPlayerHaveKey = false; //global variable
 const int MAX = 4;
-string arrayOfWords[MAX]; //array of wordle answers
+string wordsArr[MAX]; //array of wordle answers
 string *ptr[MAX]; //array of pointers
 string word = "";
+QString solution = "power";
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -66,6 +67,28 @@ void MainWindow::on_pushInteract_clicked()
         ui->pushWest->setVisible(false);
         ui->pushTeleport->setVisible(false);
         ui->WordleLabel->setVisible(true);
+        //playWordle();
+
+        string tmp;
+        ifstream readFile;
+
+         try {
+             readFile.open(":/txt/TxtFiles/guess.txt");
+             int j=0;
+             while (getline (readFile, tmp)) {
+
+                wordsArr[j] = tmp; //use of arrays
+                j++;
+            }
+            readFile.close();
+         } catch (const ifstream::failure& e) {
+             cout << "Exception opening/reading wordle file ";
+         }
+
+        for (int i = 0; i < MAX; i++) {
+              ptr[i] = &wordsArr[i];
+           }
+         word = *ptr[0];
 
     } else if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == false) {
         ui->MainOutput->setText("You do not have a key!");
@@ -305,45 +328,68 @@ void MainWindow::changeImage()
     }
 }
 
+/*void MainWindow::playWordle()
+{
+    string tmp;
+    ifstream readFile;
+
+     try {
+         readFile.open(":/txt/TxtFiles/guess.txt");
+         int j=0;
+         while (getline (readFile, tmp)) {
+
+            wordsArr[j] = tmp; //use of arrays
+            j++;
+        }
+        readFile.close();
+     } catch (const ifstream::failure& e) {
+         cout << "Exception opening/reading wordle file ";
+     }
+
+    for (int i = 0; i < MAX; i++) {
+          ptr[i] = &wordsArr[i];
+       }
+     word = *ptr[0];
+
+int arrSize = sizeof(&ptr)/sizeof(*ptr[0]); //use of pointers
+solution = QString::fromStdString(*ptr[rand() % arrSize]);
+}*/
 
 void MainWindow::on_WordleInput_returnPressed()
 {
-        string temp;
-        ifstream readFile;
-
-         try {
-             readFile.open(":/txt/TxtFiles/guess.txt");
-             int j=0;
-             while (getline (readFile, temp)) {
-
-                arrayOfWords[j] = temp;
-                j++;
-            }
-            readFile.close();
-         } catch (const ifstream::failure& e) {
-             cout << "Exception opening/reading wordle file ";
-         }
-
-        for (int i = 0; i < MAX; i++) {
-              ptr[i] = &arrayOfWords[i];
-           }
-         word = *ptr[0];
-
-    int arrSize = sizeof(&ptr)/sizeof(*ptr[0]);
-    QString solution = QString::fromStdString(*ptr[rand() % arrSize]);
-
     numOfTries++;
+
     if (numOfTries >= 6) {
         ui->WordleLabel->setText("You have failed. Game over");
         ui->finallabel->setVisible(true);
     }
+
     QString currentGuess = ui->WordleInput->text();
-    if (QString::compare(currentGuess, solution, Qt::CaseInsensitive)) {
+
+    if (QString::compare(currentGuess, solution, Qt::CaseInsensitive) == 0) {
         ui->WordleLabel->setText("All letters correct! \nYOU WINNNNNNN!!!!!");
             QPixmap d13(":/Images/ImageFiles/escape.png");
             ui->ImageOutput->setPixmap(d13);
             ui->ImageOutput->setScaledContents(true);
+    //toStdString()
     }
+//    string sol = solution.toStdString();
+//    vector<char> currentLetters(currentGuess.begin(), currentGuess.end());
+//    vector<char> wordLetters(sol.begin(), sol.end());
+//    string out;
+
+//    for (int i = 0; i < 5; i++) {
+//        for (int j = 0; j < 5; j++) {
+//            if (wordLetters.at(i) == currentLetters.at(j)) {
+//                out.insert(0, 1, currentLetters.at(i));
+//                out = " y\n";
+//            }
+//        }
+//        if (wordLetters.at(i) == currentLetters.at(i)) {
+//            out.insert(0, 1, currentLetters.at(i));
+//            out = " g\n";
+//        }
+//    }
+//    QString qstr = QString::fromStdString(out);
+//    ui->WordleLabel->setText(qstr);
 }
-
-

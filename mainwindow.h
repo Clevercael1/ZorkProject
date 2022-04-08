@@ -17,6 +17,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     friend class ZorkUL; //friendship
+    //void playWordle();
 
 private slots:
     //void on_pushMap_clicked();

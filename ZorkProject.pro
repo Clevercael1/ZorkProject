@@ -14,14 +14,20 @@ SOURCES += \
     ZorkUL.cpp \
     item.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    sub.cpp \
+    subsub.cpp \
+    super.cpp
 
 HEADERS += \
     Command.h \
     Room.h \
     ZorkUL.h \
     item.h \
-    mainwindow.h
+    mainwindow.h \
+    sub.h \
+    subsub.h \
+    super.h
 
 FORMS += \
     mainwindow.ui
