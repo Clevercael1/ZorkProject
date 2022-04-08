@@ -16,6 +16,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    friend class ZorkUL; //friendship
 
 private slots:
     //void on_pushMap_clicked();
@@ -39,7 +40,7 @@ private:
     ZorkUL *zork;
 
 protected:
-    int numOfTries;
+    int numOfTries = 0;
 
 };
 #endif // MAINWINDOW_H

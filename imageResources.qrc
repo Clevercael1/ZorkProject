@@ -16,4 +16,8 @@
         <file>ImageFiles/keyhole.png</file>
         <file>ImageFiles/keys.png</file>
     </qresource>
+    <qresource prefix="/txt">
+        <file>TxtFiles/sol.txt</file>
+        <file>TxtFiles/guess.txt</file>
+    </qresource>
 </RCC>

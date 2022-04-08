@@ -4,8 +4,13 @@
 #include "Command.h"
 #include "ZorkUL.h"
 #include <QTimer>
+#include <fstream>
 
 bool doesPlayerHaveKey = false; //global variable
+const int MAX = 4;
+string arrayOfWords[MAX]; //array of wordle answers
+string *ptr[MAX]; //array of pointers
+string word = "";
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -21,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     ui->WordleInput->setVisible(false);
     ui->WordleLabel->setVisible(false);
+    ui->finallabel->setVisible(false);
 
     changeImage();
 }
@@ -297,26 +303,47 @@ void MainWindow::changeImage()
         ui->ImageOutput->setScaledContents(true);
         ui->MainOutput->setText("The door is locked, go look for a key!");
     }
-//    QPixmap d13(":/Images/ImageFiles/escape.png");
-//    ui->ImageOutput->setPixmap(d13);
-//    ui->ImageOutput->setScaledContents(true);
 }
 
 
 void MainWindow::on_WordleInput_returnPressed()
 {
+        string temp;
+        ifstream readFile;
 
-    vector<QString> input;
-    QString solution = input.at(rand() % input.size());
+         try {
+             readFile.open(":/txt/TxtFiles/guess.txt");
+             int j=0;
+             while (getline (readFile, temp)) {
+
+                arrayOfWords[j] = temp;
+                j++;
+            }
+            readFile.close();
+         } catch (const ifstream::failure& e) {
+             cout << "Exception opening/reading wordle file ";
+         }
+
+        for (int i = 0; i < MAX; i++) {
+              ptr[i] = &arrayOfWords[i];
+           }
+         word = *ptr[0];
+
+    int arrSize = sizeof(&ptr)/sizeof(*ptr[0]);
+    QString solution = QString::fromStdString(*ptr[rand() % arrSize]);
 
     numOfTries++;
     if (numOfTries >= 6) {
         ui->WordleLabel->setText("You have failed. Game over");
+        ui->finallabel->setVisible(true);
     }
     QString currentGuess = ui->WordleInput->text();
     if (QString::compare(currentGuess, solution, Qt::CaseInsensitive)) {
         ui->WordleLabel->setText("All letters correct! \nYOU WINNNNNNN!!!!!");
+            QPixmap d13(":/Images/ImageFiles/escape.png");
+            ui->ImageOutput->setPixmap(d13);
+            ui->ImageOutput->setScaledContents(true);
     }
-
 }
+
 

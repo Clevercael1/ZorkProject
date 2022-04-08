@@ -246,6 +246,26 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="finallabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>-20</y>
+      <width>801</width>
+      <height>641</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Game Over</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>MainOutput</zorder>
    <zorder>pushSouth</zorder>
    <zorder>pushWest</zorder>
@@ -260,6 +280,7 @@ color: rgb(255, 255, 255);</string>
    <zorder>ExceptionLabel</zorder>
    <zorder>WordleInput</zorder>
    <zorder>WordleLabel</zorder>
+   <zorder>finallabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
