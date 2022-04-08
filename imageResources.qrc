@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>ImageFiles/dungeon1.png</file>
+        <file>ImageFiles/dungeon2.png</file>
+        <file>ImageFiles/dungeon3.png</file>
+        <file>ImageFiles/dungeon4.png</file>
+        <file>ImageFiles/dungeon5.png</file>
+        <file>ImageFiles/dungeon6.png</file>
+        <file>ImageFiles/dungeon7.png</file>
+        <file>ImageFiles/dungeon8.png</file>
+        <file>ImageFiles/dungeon9.png</file>
+        <file>ImageFiles/dungeon10.png</file>
+        <file>ImageFiles/dungeon11.png</file>
+        <file>ImageFiles/dungeon12.png</file>
+        <file>ImageFiles/escape.png</file>
+        <file>ImageFiles/keyhole.png</file>
+        <file>ImageFiles/keys.png</file>
+    </qresource>
+</RCC>

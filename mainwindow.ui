@@ -30,7 +30,7 @@
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>Main Output</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="pushSouth">
@@ -135,7 +135,7 @@ background-color: rgb(0, 0, 0);</string>
      <string>Pickup Item</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushDrop">
+   <widget class="QPushButton" name="pushInteract">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -149,7 +149,7 @@ background-color: rgb(0, 0, 0);</string>
 background-color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>Drop Item</string>
+     <string>Interact</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushTeleport">
@@ -203,7 +203,7 @@ background-color: rgb(0, 0, 0);</string>
      <string notr="true">color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>ImageOutput</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="ExceptionLabel">
@@ -225,7 +225,7 @@ background-color: rgb(0, 0, 0);</string>
    <zorder>pushEast</zorder>
    <zorder>pushNorth</zorder>
    <zorder>pushTake</zorder>
-   <zorder>pushDrop</zorder>
+   <zorder>pushInteract</zorder>
    <zorder>pushTeleport</zorder>
    <zorder>pushQuit</zorder>
    <zorder>ImageOutput</zorder>

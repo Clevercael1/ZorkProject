@@ -17,9 +17,9 @@ private:
     Parser parser;
     Room *currentRoom;
     void createRooms();
-    void printWelcome();
-    bool processCommand(Command command);
-    void printHelp();
+    //void printWelcome();
+    //bool processCommand(Command command);
+    //void printHelp();
     //void goRoom(Command command);
     void createItems();
     void displayItems();
@@ -30,10 +30,10 @@ private:
 public:
     ZorkUL();
     void play();
-    string go(string direction);
+    //string go(string direction);
     Room* getCurrentRoom();
     void setCurrentRoom(Room*);
-    void teleport(string rooms);
+    string teleport(string rooms);
 };
 
 #endif /*ZORKUL_H_*/

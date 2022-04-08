@@ -5,17 +5,21 @@
 #include "ZorkUL.h"
 #include <QTimer>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+bool doesPlayerHaveKey = false; //global variable
+
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
     zork = new ZorkUL();
 
-    QPixmap dir("C:/Users/caelo/Documents/ZorkProject/ImageFiles/dog");
-    ui->ImageOutput->setPixmap(dir);
-    ui->ImageOutput->setScaledContents(true);
+    ui->MainOutput->setVisible(true);
+    ui->MainOutput->setText("Welcome to Zork, Explore this dungeon and try to find an escape");
+
+    ui->MainOutput->setVisible(true);
+    QTimer::singleShot(4000, this, [this] () { ui->MainOutput->setText("room = a.\nno items in room\nexits = east north south west"); });
+
+    changeImage();
 }
 
 MainWindow::~MainWindow()
@@ -23,18 +27,30 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushTake_clicked()
+void MainWindow::on_pushTake_clicked()//todo
 {
-}
+    Room* currentRoom = zork->getCurrentRoom();
+    if (currentRoom->shortDescription() == "g") {
+        ui->MainOutput->setText("You have picked up the lost key!!!!");
+        doesPlayerHaveKey = true;
+        QPixmap d15(":/Images/ImageFiles/keys.png");
+        ui->ImageOutput->setPixmap(d15);
+        ui->ImageOutput->setScaledContents(true);
 
-void MainWindow::on_pushDrop_clicked()
+    } else {
+        QString notInRoom =  "item is not in room";
+        ui->MainOutput->setText(notInRoom);
+        }
+     }
+
+
+void MainWindow::on_pushInteract_clicked()//todo
 {
 
 }
 
 void MainWindow::on_pushNorth_clicked()
 {
-    //ZorkUL zork;
     Room* currentRoom = zork->getCurrentRoom();
 
     try {
@@ -52,11 +68,12 @@ void MainWindow::on_pushNorth_clicked()
     string output = currentRoom->longDescription();
     QString qstr = QString::fromStdString(output);
     ui->MainOutput->setText(qstr);
-} //currentroom not changing? why?
+
+    changeImage();
+}
 
 void MainWindow::on_pushSouth_clicked()
 {
-    //ZorkUL zork;
     Room* currentRoom = zork->getCurrentRoom();
 
     try {
@@ -74,11 +91,12 @@ void MainWindow::on_pushSouth_clicked()
     QString qstr = QString::fromStdString(output);
     ui->MainOutput->setText(qstr);
 
+    changeImage();
+
 }
 
 void MainWindow::on_pushEast_clicked()
 {
-    //ZorkUL zork;
     Room* currentRoom = zork->getCurrentRoom();
 
     try {
@@ -96,11 +114,12 @@ void MainWindow::on_pushEast_clicked()
     QString qstr = QString::fromStdString(output);
     ui->MainOutput->setText(qstr);
 
+    changeImage();
+
 }
 
 void MainWindow::on_pushWest_clicked()
 {
-    //ZorkUL zork;
     Room* currentRoom = zork->getCurrentRoom();
 
     try {
@@ -118,6 +137,8 @@ void MainWindow::on_pushWest_clicked()
     QString qstr = QString::fromStdString(output);
     ui->MainOutput->setText(qstr);
 
+    changeImage();
+
 }
 
 void MainWindow::on_pushQuit_clicked()
@@ -129,7 +150,7 @@ void MainWindow::on_pushQuit_clicked()
 void MainWindow::on_pushTeleport_clicked()
 {
     string roomName;
-    int randomNum = rand() % 12;
+    int randomNum = rand() % 11;
         switch(randomNum) {
         case(0):
             roomName = "a";
@@ -164,12 +185,11 @@ void MainWindow::on_pushTeleport_clicked()
         case(10):
             roomName = "k";
             break;
-        case(11):
-            roomName = "l";
-            break;
         }
-    zork->teleport(roomName);
-
+    string tp = zork->teleport(roomName);
+    QString tpString = QString::fromStdString(tp);
+    ui->MainOutput->setText(tpString);
+    changeImage();
 }
 
 void MainWindow::on_pushMap_pressed()
@@ -185,5 +205,68 @@ void MainWindow::on_pushMap_released()
     string output = currentRoom->longDescription();
     QString qstr = QString::fromStdString(output);
     ui->MainOutput->setText(qstr);
+}
+
+void MainWindow::changeImage()
+{
+    Room* currentRoom = zork->getCurrentRoom();
+
+    if (currentRoom->shortDescription() == "a") {
+        QPixmap d1(":/Images/ImageFiles/dungeon1.png");
+        ui->ImageOutput->setPixmap(d1);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "b") {
+        QPixmap d2(":/Images/ImageFiles/dungeon2.png");
+        ui->ImageOutput->setPixmap(d2);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "c") {
+        QPixmap d3(":/Images/ImageFiles/dungeon3.png");
+        ui->ImageOutput->setPixmap(d3);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "d") {
+        QPixmap d4(":/Images/ImageFiles/dungeon4.png");
+        ui->ImageOutput->setPixmap(d4);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "e") {
+        QPixmap d5(":/Images/ImageFiles/dungeon5.png");
+        ui->ImageOutput->setPixmap(d5);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "f") {
+        QPixmap d6(":/Images/ImageFiles/dungeon6.png");
+        ui->ImageOutput->setPixmap(d6);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "g") {
+        QPixmap d7(":/Images/ImageFiles/dungeon7.png");
+        ui->ImageOutput->setPixmap(d7);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "h") {
+        QPixmap d8(":/Images/ImageFiles/dungeon8.png");
+        ui->ImageOutput->setPixmap(d8);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "i") {
+        QPixmap d9(":/Images/ImageFiles/dungeon9.png");
+        ui->ImageOutput->setPixmap(d9);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "j") {
+        QPixmap d10(":/Images/ImageFiles/dungeon10.png");
+        ui->ImageOutput->setPixmap(d10);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "k") {
+        QPixmap d11(":/Images/ImageFiles/dungeon11.png");
+        ui->ImageOutput->setPixmap(d11);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == true) {
+        QPixmap d12(":/Images/ImageFiles/dungeon12.png");
+        ui->ImageOutput->setPixmap(d12);
+        ui->ImageOutput->setScaledContents(true);
+    } else if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == false) {
+        QPixmap d14(":/Images/ImageFiles/keyhole.png");
+        ui->ImageOutput->setPixmap(d14);
+        ui->ImageOutput->setScaledContents(true);
+    }
+
+//    QPixmap d13(":/Images/ImageFiles/escape.png");
+//    ui->ImageOutput->setPixmap(d13);
+//    ui->ImageOutput->setScaledContents(true);
 }
 
