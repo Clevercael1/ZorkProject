@@ -4,7 +4,6 @@
 #include "Command.h"
 #include "ZorkUL.h"
 #include <QTimer>
-#include "Wordle.h"
 
 bool doesPlayerHaveKey = false; //global variable
 
@@ -20,8 +19,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->MainOutput->setVisible(true);
     QTimer::singleShot(4000, this, [this] () { ui->MainOutput->setText("room = a.\nno items in room\nexits = east north south west"); });
 
-    wordle = new Wordle();
-    ui->WordleInput->setVisible(true);
+    ui->WordleInput->setVisible(false);
 
     changeImage();
 }
@@ -31,7 +29,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushTake_clicked()//todo
+void MainWindow::on_pushTake_clicked()
 {
     Room* currentRoom = zork->getCurrentRoom();
     if (currentRoom->shortDescription() == "g") {
@@ -48,12 +46,13 @@ void MainWindow::on_pushTake_clicked()//todo
      }
 
 
-void MainWindow::on_pushInteract_clicked()//todo
+void MainWindow::on_pushInteract_clicked()
 {
     Room* currentRoom = zork->getCurrentRoom();
     if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == true) {
 
         ui->WordleInput->setVisible(true);
+        ui->WordleLabel->setText("please enter a 5 letter word. \nYou have 6 attempts to guess \nthe right word. If you do not \nget it correct, you will lose!");
 
     } else if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == false) {
         ui->MainOutput->setText("You do not have a key!");
@@ -70,11 +69,10 @@ void MainWindow::on_pushNorth_clicked()
         ui->ExceptionLabel->setVisible(true);
         QString exceptionString = QString::fromStdString("No more rooms to the north");
         ui->ExceptionLabel->setText(exceptionString);
-        QTimer::singleShot(5000, ui->ExceptionLabel, &QLabel::hide); //wait 10 seconds then hide error message
+        QTimer::singleShot(5000, ui->ExceptionLabel, &QLabel::hide); //wait 5 seconds then hide error message
     }
 
     zork->setCurrentRoom(currentRoom);
-    //string output = zork->getCurrentRoom()->shortDescription() + "\n";
 
     string output = currentRoom->longDescription();
     QString qstr = QString::fromStdString(output);
@@ -93,7 +91,7 @@ void MainWindow::on_pushSouth_clicked()
         ui->ExceptionLabel->setVisible(true);
         QString exceptionString = QString::fromStdString("No more rooms to the south");
         ui->ExceptionLabel->setText(exceptionString);
-        QTimer::singleShot(5000, ui->ExceptionLabel, &QLabel::hide); //wait 10 seconds then hide error message
+        QTimer::singleShot(5000, ui->ExceptionLabel, &QLabel::hide); //wait 5 seconds then hide error message
     }
 
     zork->setCurrentRoom(currentRoom);
@@ -116,7 +114,7 @@ void MainWindow::on_pushEast_clicked()
         ui->ExceptionLabel->setVisible(true);
         QString exceptionString = QString::fromStdString("No more rooms to the east");
         ui->ExceptionLabel->setText(exceptionString);
-        QTimer::singleShot(5000, ui->ExceptionLabel, &QLabel::hide); //wait 10 seconds then hide error message
+        QTimer::singleShot(5000, ui->ExceptionLabel, &QLabel::hide); //wait 5 seconds then hide error message
     }
 
     zork->setCurrentRoom(currentRoom);
@@ -127,6 +125,12 @@ void MainWindow::on_pushEast_clicked()
 
     changeImage();
 
+
+    if (currentRoom->shortDescription() == "g" && doesPlayerHaveKey == false) {
+        ui->MainOutput->setText("room = g.\nThere is a shiny key on the wall\nexits = west");
+    } else if (currentRoom->shortDescription() == "g" && doesPlayerHaveKey == true) {
+        ui->MainOutput->setText("room = g.\nno items in room\nexits = west");
+    }
 }
 
 void MainWindow::on_pushWest_clicked()
@@ -139,7 +143,7 @@ void MainWindow::on_pushWest_clicked()
         ui->ExceptionLabel->setVisible(true);
         QString exceptionString = QString::fromStdString("No more rooms to the west");
         ui->ExceptionLabel->setText(exceptionString);
-        QTimer::singleShot(5000, ui->ExceptionLabel, &QLabel::hide); //wait 10 seconds then hide error message
+        QTimer::singleShot(5000, ui->ExceptionLabel, &QLabel::hide); //wait 5 seconds then hide error message
     }
 
     zork->setCurrentRoom(currentRoom);
@@ -205,7 +209,16 @@ void MainWindow::on_pushTeleport_clicked()
 
 void MainWindow::on_pushMap_pressed()
 {
-    ui->MainOutput->setText("[h] --- [f] --- [g]\n             |         \n             |         \n[c] --- [a] --- [b]\n             |         \n             |         \n[i] --- [d] --- [e]\n |                 \n |                 \n[j] --- [k] --- [l]");
+    ui->MainOutput->setText("[h] --- [f] --- [g]"
+                            "\n             |         "
+                            "\n             |         "
+                            "\n[c] --- [a] --- [b]"
+                            "\n             |         "
+                            "\n             |         "
+                            "\n[i] --- [d] --- [e]"
+                            "\n |                 "
+                            "\n |                 "
+                            "\n[j] --- [k] --- [l]");
 
 }
 
@@ -280,5 +293,28 @@ void MainWindow::changeImage()
 //    QPixmap d13(":/Images/ImageFiles/escape.png");
 //    ui->ImageOutput->setPixmap(d13);
 //    ui->ImageOutput->setScaledContents(true);
+}
+
+bool operator==(QString a,QString b) {
+    if (a.toStdString() == b.toStdString()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void MainWindow::on_WordleInput_returnPressed()
+{
+
+    vector<QString> input;
+
+    QString solution = input.at(rand() % 100);
+
+    int numOfTries;
+    QString currentGuess = ui->WordleInput->text();
+    if (currentGuess == solution) {
+
+    }
+
 }
 
