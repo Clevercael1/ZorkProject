@@ -1,7 +1,8 @@
-Features:
-
-
 Link to github: https://github.com/Clevercael1/ZorkProject
+
+Cael O'Flaherty
+
+features:
 namespaces - subsub.h/ - line 6
 pre - processor directives - subsub.h - line 2
 references - mainwindow.cpp - line 89
