@@ -14,6 +14,7 @@ SOURCES += \
     CommandWords.cpp \
     Parser.cpp \
     Room.cpp \
+    Wordle.cpp \
     ZorkUL.cpp \
     item.cpp \
     main.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     CommandWords.h \
     Parser.h \
     Room.h \
+    Wordle.h \
     ZorkUL.h \
     item.h \
     mainwindow.h

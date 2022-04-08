@@ -219,6 +219,16 @@ background-color: rgb(0, 0, 0);</string>
      <string/>
     </property>
    </widget>
+   <widget class="QTextEdit" name="WordleInput">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>219</y>
+      <width>104</width>
+      <height>71</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>MainOutput</zorder>
    <zorder>pushSouth</zorder>
    <zorder>pushWest</zorder>
@@ -231,6 +241,7 @@ background-color: rgb(0, 0, 0);</string>
    <zorder>ImageOutput</zorder>
    <zorder>pushMap</zorder>
    <zorder>ExceptionLabel</zorder>
+   <zorder>WordleInput</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

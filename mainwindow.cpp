@@ -4,6 +4,7 @@
 #include "Command.h"
 #include "ZorkUL.h"
 #include <QTimer>
+#include "Wordle.h"
 
 bool doesPlayerHaveKey = false; //global variable
 
@@ -18,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     ui->MainOutput->setVisible(true);
     QTimer::singleShot(4000, this, [this] () { ui->MainOutput->setText("room = a.\nno items in room\nexits = east north south west"); });
+
+    wordle = new Wordle();
+    ui->WordleInput->setVisible(true);
 
     changeImage();
 }
@@ -46,7 +50,14 @@ void MainWindow::on_pushTake_clicked()//todo
 
 void MainWindow::on_pushInteract_clicked()//todo
 {
+    Room* currentRoom = zork->getCurrentRoom();
+    if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == true) {
 
+        ui->WordleInput->setVisible(true);
+
+    } else if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == false) {
+        ui->MainOutput->setText("You do not have a key!");
+    }
 }
 
 void MainWindow::on_pushNorth_clicked()
@@ -259,12 +270,13 @@ void MainWindow::changeImage()
         QPixmap d12(":/Images/ImageFiles/dungeon12.png");
         ui->ImageOutput->setPixmap(d12);
         ui->ImageOutput->setScaledContents(true);
+        ui->MainOutput->setText("There is a game on the wall, interact with it to play.");
     } else if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == false) {
         QPixmap d14(":/Images/ImageFiles/keyhole.png");
         ui->ImageOutput->setPixmap(d14);
         ui->ImageOutput->setScaledContents(true);
+        ui->MainOutput->setText("The door is locked, go look for a key!");
     }
-
 //    QPixmap d13(":/Images/ImageFiles/escape.png");
 //    ui->ImageOutput->setPixmap(d13);
 //    ui->ImageOutput->setScaledContents(true);

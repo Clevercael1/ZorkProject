@@ -35,5 +35,6 @@ private:
     Ui::MainWindow *ui;
 
     ZorkUL *zork;
+    Wordle *wordle;
 };
 #endif // MAINWINDOW_H
