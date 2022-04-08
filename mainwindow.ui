@@ -236,10 +236,10 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="WordleLabel">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>160</y>
-      <width>161</width>
-      <height>71</height>
+      <x>390</x>
+      <y>90</y>
+      <width>391</width>
+      <height>141</height>
      </rect>
     </property>
     <property name="text">

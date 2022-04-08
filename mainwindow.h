@@ -30,7 +30,6 @@ private slots:
     void on_pushMap_released();
     void on_pushInteract_clicked();
     void changeImage();
-    bool operator==(QString a,QString b);
 
     void on_WordleInput_returnPressed();
 
@@ -38,5 +37,9 @@ private:
     Ui::MainWindow *ui;
 
     ZorkUL *zork;
+
+protected:
+    int numOfTries;
+
 };
 #endif // MAINWINDOW_H

@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     QTimer::singleShot(4000, this, [this] () { ui->MainOutput->setText("room = a.\nno items in room\nexits = east north south west"); });
 
     ui->WordleInput->setVisible(false);
+    ui->WordleLabel->setVisible(false);
 
     changeImage();
 }
@@ -53,6 +54,12 @@ void MainWindow::on_pushInteract_clicked()
 
         ui->WordleInput->setVisible(true);
         ui->WordleLabel->setText("please enter a 5 letter word. \nYou have 6 attempts to guess \nthe right word. If you do not \nget it correct, you will lose!");
+        ui->pushNorth->setVisible(false);
+        ui->pushSouth->setVisible(false);
+        ui->pushEast->setVisible(false);
+        ui->pushWest->setVisible(false);
+        ui->pushTeleport->setVisible(false);
+        ui->WordleLabel->setVisible(true);
 
     } else if (currentRoom->shortDescription() == "l" && doesPlayerHaveKey == false) {
         ui->MainOutput->setText("You do not have a key!");
@@ -295,25 +302,20 @@ void MainWindow::changeImage()
 //    ui->ImageOutput->setScaledContents(true);
 }
 
-bool operator==(QString a,QString b) {
-    if (a.toStdString() == b.toStdString()) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 void MainWindow::on_WordleInput_returnPressed()
 {
 
     vector<QString> input;
+    QString solution = input.at(rand() % input.size());
 
-    QString solution = input.at(rand() % 100);
-
-    int numOfTries;
+    numOfTries++;
+    if (numOfTries >= 6) {
+        ui->WordleLabel->setText("You have failed. Game over");
+    }
     QString currentGuess = ui->WordleInput->text();
-    if (currentGuess == solution) {
-
+    if (QString::compare(currentGuess, solution, Qt::CaseInsensitive)) {
+        ui->WordleLabel->setText("All letters correct! \nYOU WINNNNNNN!!!!!");
     }
 
 }
